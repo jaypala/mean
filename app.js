@@ -7,10 +7,7 @@ var mongoose = require('mongoose');
 
 // requiring config db file 
 var dbConfig = require('./config/database.js');
-
-
 mongoose.connect(dbConfig.database);
-
 var db = mongoose.connection;
 
 require('./config/vengine.js')(app);
