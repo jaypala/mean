@@ -1,0 +1,67 @@
+<html>
+<% include ./partials/head %>
+<body ng-app="myApp">
+    <!-- Navigation start -->
+    <% include ./partials/header %>
+    <!-- Navigation ends -->
+
+	<div class="container" ng-controller="UserCtrl">
+		<h1>Manage Users</h1>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>City</th>
+					<th>Mobile</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Add User -->
+				<tr>
+					<td><input type="text" class="form-control" name="name" ng-model="user.name"></td>
+					<td><input type="text" class="form-control" name="email" ng-model="user.email"></td>
+					<td><input type="text" class="form-control" name="city" ng-model="user.city"></td>
+					<td><input type="text" class="form-control" name="mobile" ng-model="user.mobile"></td>
+					<td><button class="btn btn-primary" ng-click="addUser()">Add</button> <button class="btn btn-warning" ng-click="resetAdd()">Cancel</button></td>
+				</tr>
+				<!-- display user -->
+				<tr ng-repeat="user in users" ng-include="getTemplate(user)">
+					
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+	<!-- display user template -->
+	<script type="text/ng-template" id="display">
+        <td>{{ user.name }}</td>
+		<td>{{ user.email }}</td>
+		<td>{{ user.city }}</td>
+		<td>{{ user.mobile }}</td>
+		<td>
+			<button class="btn btn-warning" ng-click="editUser(user)">Edit</button> 
+			<button class="btn btn-danger" ng-click="deleteUser(user._id)">Delete</button>
+		</td>
+    </script>
+
+	<!-- edit user template -->
+     <script type="text/ng-template" id="edit">
+        <td><input type="text" ng-model="selectedUser.name" /></td>
+        <td><input type="text" ng-model="selectedUser.email" /></td>
+        <td><input type="text" ng-model="selectedUser.city" /></td>
+        <td><input type="text" ng-model="selectedUser.mobile" /></td>
+        <td>
+            <button class="btn btn-info" ng-click="updateUser()">Save</button>
+            <button class="btn btn-warning" ng-click="resetUpdate()">Cancel</button>
+        </td>
+    </script>
+	
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+	<script type="text/javascript" src="../controllers/usercontroller.js"></script>
+
+</body>
+</html>
